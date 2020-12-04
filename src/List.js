@@ -4,7 +4,7 @@ import React from 'react';
 import Card from './Card';
 import './List.css';
 
-function List(props){
+export default function List(props){
     return (
         <section className="List">
         <header className="List-header">
@@ -14,15 +14,18 @@ function List(props){
           {props.cards.map((card)=>
           <Card 
             title={card.title}
+            id={card.id}
             content = {card.content}
-            key = {card.id}/>
+            key = {card.id} 
+            onClickDelete={props.onClickDelete} />
             )}
-        <button type="button" className="List-add-button">
+        <button type="button" className="List-add-button" onClick={() => props.onClickAdd(props.id)}>
               + Add Random Card
             </button>
         </div>
       </section>    
-    )
-}
-
-export default List ;
+      )
+          }
+      List.defaultProps = {
+        onClickAdd : () =>{},
+      }
